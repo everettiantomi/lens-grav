@@ -1,1 +1,3 @@
-To add profiles to the lenstronomy package the file anaconda3/lib/python3.8/site-packages/lenstronomy/LensModel/profile_list_base.py  should be modified on lines 32 and 150. Syntax should be clear be context.
+To add profiles to the lenstronomy package the file
+*anaconda3/lib/python3.8/site-packages/lenstronomy/LensModel/profile_list_base.py*
+should be modified on lines 32 and 150. Syntax should be clear be context.
