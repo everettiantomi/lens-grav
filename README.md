@@ -1,3 +1,3 @@
-# lens-grav
-Gravitational lensing with plasma. Numerical and perturbative approach.
-We are using version 1.8.0 of lenstronomy. **WARNING**: profiles used here may not work on older versions.
+# Gravitational lensing.
+We study the effects of plasma in the strong gravitational lensing regime. We take a numerical and perturbative approach.
+For the numerical approach we use version 1.8.0 of [lenstronomy](https://github.com/sibirrer/lenstronomy). **WARNING**: profiles used here may not work on older versions.
