@@ -103,6 +103,7 @@ class PlasmaExponentialSIEBH(LensProfileBase):
         dr_dx = x_/r; dr_dy = y_/r; dtheta_dx = -y_/r**2; dtheta_dy = x_/r**2; dr_dx_dr = 0.0; dr_dy_dr = 0.0; dr_dx_dtheta = -np.sin(theta)
         dr_dy_dtheta = np.cos(theta); dtheta_dx_dr = np.sin(theta)/r**2; dtheta_dy_dr = -np.cos(theta)/r**2
         dtheta_dx_dtheta = -np.cos(theta)/r; dtheta_dy_dtheta = -np.sin(theta)/r
+        r1 = np.sqrt((x_- x1)**2 + (y_- y1)**2)
         dr1_dx = (x_-x1)/r1
         dr1_dy = (y_-y1)/r1
         # derivadas primeras
