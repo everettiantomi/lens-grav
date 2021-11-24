@@ -1,11 +1,11 @@
 import numpy as np
+from scipy.optimize import root_scalar
 
 class sieplasmajet(object):
-    def __init__(self, theta_E, r, eta, phi, psi0_plasma_num, theta_0_num, B, C, delta_rs, deltab_10, deltab_20):
+    def __init__(self, theta_E_g, eta, phi, psi0_plasma_num, theta_0_num, B, C, delta_rs, deltab_10, deltab_20):
 
         
-        self.theta_E = theta_E
-        self.r = r
+        self.theta_E_g = theta_E_g
         self.eta = eta
         self.phi = phi
         self.psi0_plasma_num = psi0_plasma_num
@@ -16,17 +16,26 @@ class sieplasmajet(object):
         self.deltab_10 = deltab_10
         self.deltab_20 = deltab_20
         
+        def f(r):
+            tmp_f = r - theta_E_g + C/r * (r/B/theta_0_num)**C * psi0_plasma_num * np.exp(-(r/B/theta_0_num)**C)
+            return tmp_f
+            
+        zero = root_scalar(f, bracket=[theta_E_g*.1, theta_E_g*1.9], method='bisect')
+        self.theta_E = zero.root
+        self.r = zero.root
+        
+        
     def psi_func(self):
-        tmp_psi = self.theta_E*self.r*np.sqrt(1.-self.eta*np.cos(2.*self.phi)) + \
+        tmp_psi = self.theta_E_g*self.r*np.sqrt(1.-self.eta*np.cos(2.*self.phi)) + \
                   self.psi0_plasma_num*np.exp(-(self.r/self.B/self.theta_0_num)**self.C) 
         self.psi = tmp_psi
     
     def dpsi_func(self):
-        tmp_dpsi = self.theta_E*self.r*(np.sqrt( 1. - self.eta*np.cos(2*self.phi)) - 1)
+        tmp_dpsi = self.theta_E_g*self.r*(np.sqrt( 1. - self.eta*np.cos(2*self.phi)) - 1)
         self.dpsi = tmp_dpsi
     
     def psi0_func(self):
-        tmp_psi0 = self.theta_E*self.r + self.psi0_plasma_num*np.exp(-(self.r/self.B/self.theta_0_num)**self.C)
+        tmp_psi0 = self.theta_E_g*self.r + self.psi0_plasma_num*np.exp(-(self.r/self.B/self.theta_0_num)**self.C)
         self.psi0 = tmp_psi0
         
     def psi_plasma_func(self):
@@ -34,11 +43,11 @@ class sieplasmajet(object):
         self.psi_plasma = tmp_psi_plasma
         
     def ddpsi_dr_func(self):
-        tmp_ddpsi = self.theta_E*(np.sqrt( 1. - self.eta*np.cos(2*self.phi)) - 1)
+        tmp_ddpsi = self.theta_E_g*(np.sqrt( 1. - self.eta*np.cos(2*self.phi)) - 1)
         self.ddpsi_dr = tmp_ddpsi
     
     def ddpsi_dphi_func(self):
-        tmp_ddpsi = self.theta_E*self.r*self.eta*np.sin(2.*self.phi)/np.sqrt(1.-self.eta*np.cos(2.*self.phi))
+        tmp_ddpsi = self.theta_E_g*self.r*self.eta*np.sin(2.*self.phi)/np.sqrt(1.-self.eta*np.cos(2.*self.phi))
         self.ddpsi_dphi = tmp_ddpsi
     
     def d2psi0_dr2_func(self):
