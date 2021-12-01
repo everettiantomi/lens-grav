@@ -22,7 +22,7 @@ class sieplasmajet(object):
         zero = root_scalar(f, bracket=[theta_E_g*.1, theta_E_g*1.9], method='bisect')
         self.theta_E = zero.root
         self.r = zero.root
-
+        r = self.r
         
         tmp_psi = theta_E_g*r*np.sqrt(1.-eta*np.cos(2.*phi)) + \
                   psi0_plasma_num*np.exp(-(r/B/theta_0_num)**C) 
@@ -40,7 +40,6 @@ class sieplasmajet(object):
         tmp_psi_plasma = psi0_plasma_num*np.exp(-(r/B/theta_0_num)**C)
         self.psi_plasma = tmp_psi_plasma
 
-
         tmp_ddpsi = theta_E_g*(np.sqrt( 1. - eta*np.cos(2*phi)) - 1)
         self.ddpsi_dr = tmp_ddpsi
 
@@ -49,15 +48,15 @@ class sieplasmajet(object):
         self.ddpsi_dphi = tmp_ddpsi
 
 
-        tmp_d2psi0 = psi_plasma * C/r**2 *(r/B/theta_0_num)**C *(1.+C*( (r/B/theta_0_num)**(C-1)))
+        tmp_d2psi0 = self.psi_plasma * C/r**2 *(r/B/theta_0_num)**C *(1.+C*( (r/B/theta_0_num)**(C-1)))
         self.d2psi0_dr2 = tmp_d2psi0
 
 
 
-        Delta = delta_rs**2 - ( 1/r*ddpsi_dphi - deltab_10*np.sin(phi) + deltab_20*np.cos(phi) )**2
+        Delta = delta_rs**2 - ( 1/r*self.ddpsi_dphi - deltab_10*np.sin(phi) + deltab_20*np.cos(phi) )**2
 
-        delta_r_1 = 1/(1 - d2psi0_dr2 )*(ddpsi_dr + deltab_10*np.cos(phi) + deltab_20*np.sin(phi) + np.sqrt(Delta))
-        delta_r_2 = 1/(1 - d2psi0_dr2 )*(ddpsi_dr + deltab_10*np.cos(phi) + deltab_20*np.sin(phi) - np.sqrt(Delta))
+        delta_r_1 = 1/(1 - self.d2psi0_dr2 )*(self.ddpsi_dr + deltab_10*np.cos(phi) + deltab_20*np.sin(phi) + np.sqrt(Delta))
+        delta_r_2 = 1/(1 - self.d2psi0_dr2 )*(self.ddpsi_dr + deltab_10*np.cos(phi) + deltab_20*np.sin(phi) - np.sqrt(Delta))
 
         self.delta_r_1 = delta_r_1
         self.delta_r_2 = delta_r_2
