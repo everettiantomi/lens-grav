@@ -48,11 +48,10 @@ class sieplasmajet(object):
         self.ddpsi_dphi = tmp_ddpsi
 
 
-        tmp_d2psi0 = self.psi_plasma * C/r**2 *(r/B/theta_0_num)**C *(1.+C*( (r/B/theta_0_num)**(C-1)))
+        tmp_d2psi0 = self.psi_plasma * ( - C*(C-1)/r**2*(r/B/theta_0_num)**C + (C/r*(r/B/theta_0_num)**C)**2 )
         self.d2psi0_dr2 = tmp_d2psi0
 
-
-
+        
         Delta = delta_rs**2 - ( 1/r*self.ddpsi_dphi - deltab_10*np.sin(phi) + deltab_20*np.cos(phi) )**2
 
         delta_r_1 = 1/(1 - self.d2psi0_dr2 )*(self.ddpsi_dr + deltab_10*np.cos(phi) + deltab_20*np.sin(phi) + np.sqrt(Delta))
