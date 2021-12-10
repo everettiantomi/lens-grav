@@ -1,3 +1,5 @@
 # Ignore all files with extension .ipynb_checkpoints
 
 *.ipynb_checkpoints
+
+*notes.ipynb
