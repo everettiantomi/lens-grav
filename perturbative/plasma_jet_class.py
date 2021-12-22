@@ -63,7 +63,7 @@ class sieplasmajet(object):
         self.delta_r_1 = delta_r_1
         self.delta_r_2 = delta_r_2
 
-        tmp_delta_r_criticline =  1/(1 - self.d2psi0_dr2 )*( self.ddpsi_dr + self.d2dpsi_dphi2 )
+        tmp_delta_r_criticline =  1/(1 - self.d2psi0_dr2 )*( self.ddpsi_dr + 1/r*self.d2dpsi_dphi2 )
         self.delta_r_criticline = tmp_delta_r_criticline
         
     def critic(self):
