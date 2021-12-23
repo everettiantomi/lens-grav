@@ -66,7 +66,12 @@ class sieplasmajet(object):
         tmp_delta_r_criticline =  1/(1 - self.d2psi0_dr2 )*( self.ddpsi_dr + 1/r*self.d2dpsi_dphi2 )
         self.delta_r_criticline = tmp_delta_r_criticline
         
-    def critic(self):
+        tmp_caustic_1 = 1/r*(self.d2dpsi_dphi2 * np.cos(phi) + self.ddpsi_dphi * np.sin(phi) )
+        self.caustic_1 = tmp_caustic_1
+        tmp_caustic_2 = 1/r*(self.d2dpsi_dphi2 * np.sin(phi) - self.ddpsi_dphi * np.cos(phi) )
+        self.caustic_2 = tmp_caustic_2
+        
+    def critic(self): #exact
         
         theta_E_g = self.theta_E_g
         eta = self.eta
