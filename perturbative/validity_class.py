@@ -2,12 +2,11 @@ import numpy as np
 from scipy.optimize import root_scalar
 from scipy.optimize import fsolve
 
-class sieplasmajet(object):
+class sieplasma(object):
     def __init__(self, theta_E_g, eta, zl, c, Dl, Ds, Dls, psi0_plasma_num, theta_0_num, B, C, delta_rs, deltab_10, deltab_20):
 
         self.theta_E_g = theta_E_g
         self.eta = eta
-        self.phi = phi
         self.psi0_plasma_num = psi0_plasma_num
         self.theta_0_num = theta_0_num
         self.B = B
@@ -72,8 +71,8 @@ class sieplasmajet(object):
         R = np.abs((delta_r[0]*(1 - self.d2psi0_dr2 ) - self.ddpsi_dr[0] - 1/r*self.d2dpsi_dphi2[0])/(delta_r[1]*(1 - self.d2psi0_dr2 ) - self.ddpsi_dr[1] - 1/r*self.d2dpsi_dphi2[1]))
         self.R = R
         
-        dt = np.abs( (1 + zl)/c * Dl*Ds/Dls * r*( delta_r[0] - delta_r[1] + np.cos(zeros_phi[1])*deltab_10 + np.sin(zeros_phi[1])*deltab_20 - np.cos(zeros_phi[0])*deltab_10 - np.sin(zeros_phi[0])*deltab_20 + 1/r*dpsi[1] - 1/r*dpsi[0]   )
-        
+        dt = np.abs( (1 + zl)/c * Dl*Ds/Dls * r*(np.cos(zeros_phi[1])*deltab_10 + np.sin(zeros_phi[1])*deltab_20 - np.cos(zeros_phi[0])*deltab_10 - np.sin(zeros_phi[0])*deltab_20 + 1/r*self.dpsi[1] - 1/r*self.dpsi[0] ))
+        self.dt = dt
         
         
         
