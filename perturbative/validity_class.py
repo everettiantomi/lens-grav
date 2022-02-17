@@ -71,7 +71,7 @@ class sieplasma(object):
         
         r_ = r + delta_r
         
-        psi = theta_E_g*r_*np.sqrt(1.-eta*np.cos(2.*zeros_phi)) - psi0_plasma_num*np.exp(-(r_/B/theta_0_num)**C)
+        psi = theta_E_g*r_*np.sqrt(1.-eta*np.cos(2.*zeros_phi)) + psi0_plasma_num*np.exp(-(r_/B/theta_0_num)**C)
         psi_plasma = psi0_plasma_num*np.exp(-(r_/B/theta_0_num)**C)
         d2psi_dr2 = psi_plasma * ( - C*(C-1)/r_**2*(r_/B/theta_0_num)**C + (C/r_*(r_/B/theta_0_num)**C)**2 )
         dpsi_dr = theta_E_g*np.sqrt(1.-eta*np.cos(2.*zeros_phi)) - C/r_*(r_/B/theta_0_num)**C*psi0_plasma_num*np.exp(-(r_/B/theta_0_num)**C) 
@@ -85,7 +85,9 @@ class sieplasma(object):
         R = np.abs(mu[0]/mu[1])
         self.R = R
         
-        t = (1 + zl)/c*Dl*Ds/Dls*(1/2* ( (r_*np.cos(zeros_phi) - deltab_10)**2 + (r_*np.sin(zeros_phi) - deltab_20)**2  )*0 - psi )
+        t = (1 + zl)/c*Dl*Ds/Dls*(1/2* ( (r_*np.cos(zeros_phi) - deltab_10)**2 + (r_*np.sin(zeros_phi) - deltab_20)**2  ) - psi )
+        
+        self.t = t/24/60/60*0.000004848136811095**2
         
         dt = np.abs(t[0]-t[1])/24/60/60*0.000004848136811095**2 #convert seconds to days and arcsec^2 to rad
         self.dt = dt
