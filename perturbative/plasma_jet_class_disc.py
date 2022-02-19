@@ -28,13 +28,14 @@ class sieplasmadisc(object):
         
         dc_dr = 2/r*c
         d2c_dr2 = 2/r**2*c
-        dc_dphi = - ( r**2*2*np.sin(phi)*np.cos(phi)*np.sin(alpha)**2 - r**2*2*np.sin(phi)*np.cos(phi)  )/theta_0y**2 - (r**2*2*np.sin(phi)*np.cos(phi)*np.cos(alpha)**2)/theta_0y**2
+        dc_dphi = - ( r**2*2*np.sin(phi)*np.cos(phi)*np.sin(alpha)**2 - r**2*2*np.sin(phi)*np.cos(phi)  )/theta_0r**2 - (r**2*2*np.sin(phi)*np.cos(phi)*np.cos(alpha)**2)/theta_0y**2
         d2c_dphi2 = (np.cos(phi)**2 - np.sin(phi)**2) * (- ( r**2*2*np.sin(alpha)**2 - r**2*2  )/theta_0r**2 - (r**2*2*np.cos(alpha)**2)/theta_0y**2)
-        d = r**2*np.sin(phi)**2*np.cos(alpha)**2*np.sin(alpha)**2 / (np.cos(alpha)**2/theta_0r**2 + np.sin(alpha)**2/theta_0y**2) / (1 / theta_0y**2 - 1 / theta_0r**2 )**2
+        
+        d = r**2*np.sin(phi)**2*np.cos(alpha)**2*np.sin(alpha)**2 / (np.cos(alpha)**2/theta_0r**2 + np.sin(alpha)**2/theta_0y**2) * (1 / theta_0y**2 - 1 / theta_0r**2 )**2
         dd_dr = 2/r*d
         d2d_dr2 = 2/r**2*d
-        dd_dphi = r**2*2*np.sin(phi)*np.cos(phi)*np.cos(alpha)**2*np.sin(alpha)**2 / (np.cos(alpha)**2/theta_0r**2 + np.sin(alpha)**2/theta_0y**2) / (1 / theta_0y**2 - 1 / theta_0r**2 )**2
-        d2d_dphi2 = r**2*2*(np.cos(phi)**2 - np.sin(phi)**2)*np.cos(alpha)**2*np.sin(alpha)**2 / (np.cos(alpha)**2/theta_0r**2 + np.sin(alpha)**2/theta_0y**2) / (1 / theta_0y**2 - 1 / theta_0r**2 )**2
+        dd_dphi = r**2*2*np.sin(phi)*np.cos(phi)*np.cos(alpha)**2*np.sin(alpha)**2 / (np.cos(alpha)**2/theta_0r**2 + np.sin(alpha)**2/theta_0y**2) * (1 / theta_0y**2 - 1 / theta_0r**2 )**2
+        d2d_dphi2 = r**2*2*(np.cos(phi)**2 - np.sin(phi)**2)*np.cos(alpha)**2*np.sin(alpha)**2 / (np.cos(alpha)**2/theta_0r**2 + np.sin(alpha)**2/theta_0y**2) * (1 / theta_0y**2 - 1 / theta_0r**2 )**2
 	
         self.d2psi0_dr2 = psi0_plasma_num * ( -2/theta_0r**2*np.exp(-(r/theta_0r)**2 ) + (2/r)**2*(r/theta_0r)**4*np.exp(-(r/theta_0r)**2))
 
