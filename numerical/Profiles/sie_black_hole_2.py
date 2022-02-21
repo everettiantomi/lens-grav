@@ -141,3 +141,7 @@ class SIEBH2(LensProfileBase):
         f_xy = dr_dx*( dphi_dr_dr*dr_dy+dphi_dr*dr_dy_dr+dphi_dr_dtheta*dtheta_dy+dphi_dtheta*dtheta_dy_dr ) \
 				+ dtheta_dx* ( dphi_dtheta_dr*dr_dy+dphi_dr*dr_dy_dtheta+dphi_dtheta_dtheta*dtheta_dy+dphi_dtheta*dtheta_dy_dtheta ) + bh1_xy + + bh2_xy
         return f_xx, f_xy, f_xy, f_yy
+        
+        
+        
+        
