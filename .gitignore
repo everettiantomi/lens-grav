@@ -1,5 +1,7 @@
 # Ignore all files with extension .ipynb_checkpoints
 
 *.ipynb_checkpoints
+*.pyc
 
 notes.ipynb
+Untitled.ipynb
